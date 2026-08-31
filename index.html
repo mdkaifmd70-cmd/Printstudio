@@ -1,33 +1,2157 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MD Kaif Print Studio</title><style>
-body{margin:0;font-family:Arial;background:#eef2f7;color:#172033}header{background:#111827;color:white;padding:16px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:12px;align-items:center}.logo{width:55px;height:55px;border-radius:50%;background:white;color:#111827;display:grid;place-items:center;font-weight:bold;text-align:center}.credit{text-align:right;font-size:12px;color:#cbd5e1}main{max-width:1400px;margin:auto;padding:18px}.tabs{display:flex;gap:8px;margin-bottom:15px}button{border:0;border-radius:7px;padding:10px 13px;font-weight:bold;cursor:pointer}.tab{background:#dbe2ea}.active{background:#2563eb!important;color:#fff}.module{display:none}.show{display:block}.grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.panel{background:#fff;padding:18px;border-radius:12px;box-shadow:0 2px 12px #0001}.preview{background:#cbd5e1;padding:18px;min-height:650px;display:flex;justify-content:center;overflow:auto}canvas{max-width:100%;height:auto;background:#fff;box-shadow:0 4px 18px #0003}label{display:block;font-size:13px;font-weight:bold;margin:10px 0 5px}input,select{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:7px;box-sizing:border-box}.upload{border:2px dashed #cbd5e1;padding:18px;text-align:center;border-radius:9px;background:#f8fafc}.row,.presets{display:grid;grid-template-columns:1fr 1fr;gap:7px}.section,.person{border:1px solid #e2e8f0;padding:11px;border-radius:9px;margin-top:10px}.personhead{display:flex;justify-content:space-between}.remove{background:#fee2e2;color:#991b1b;padding:5px 8px}.preset{background:#e2e8f0;font-size:12px}.btn{width:100%;margin-top:9px}.blue{background:#2563eb;color:#fff}.green{background:#059669;color:#fff}.dark{background:#111827;color:#fff}.range{display:grid;grid-template-columns:75px 1fr 35px;gap:5px;align-items:center;font-size:11px;margin:7px 0}.range input{padding:0}.status{background:#f1f5f9;padding:9px;border-radius:7px;font-size:12px;margin-top:9px}.note{font-size:11px;color:#475569;line-height:1.5}@media(max-width:900px){.grid{grid-template-columns:1fr}.credit{display:none}}
-</style></head><body>
-<header><div class="brand"><div class="logo">MD<br>KAIF</div><div><h1>MD Kaif PRINT STUDIO</h1><small>Photo & ID Print Preparation System</small></div></div><div class="credit">This system is designed by MD Kaif<br>Contact: 8756228841</div></header>
-<main><div class="tabs"><button class="tab active" onclick="tab('photo',this)">📷 PHOTO</button><button class="tab" onclick="tab('id',this)">🪪 ID CARD</button></div>
-<section id="photo" class="module show"><div class="grid"><div class="panel"><h3>Photo Studio</h3><div class="upload">Upload Photo<br><br><input type="file" accept="image/*" onchange="addPhoto(this)"></div><div id="people"></div>
-<label>Photo Size</label><select id="size" onchange="photo()"><option value="35,45">Passport 35 × 45 mm</option><option value="25,35">Stamp 25 × 35 mm</option><option value="50.8,50.8">2 × 2 inch</option></select><label>Paper</label><select id="orient" onchange="photo()"><option value="p">A4 Portrait</option><option value="l">A4 Landscape</option></select><div class="row"><div><label>Margin</label><input id="margin" type="number" value="5" onchange="photo()"></div><div><label>Gap</label><input id="gap" type="number" value="2" onchange="photo()"></div></div><label>Border</label><select id="border" onchange="photo()"><option value="1">ON</option><option value="0">OFF</option></select>
-<div class="section"><b>✨ Studio Finish</b><div class="presets"><button class="preset" onclick="preset(4,6,2)">Natural Clear</button><button class="preset" onclick="preset(10,14,8)">Studio Shine</button><button class="preset" onclick="preset(7,20,7)">Crystal Clear</button><button class="preset" onclick="preset(16,8,5)">Bright</button></div></div>
-<div class="section"><b>Advanced Finish</b><div class="range"><span>Brightness</span><input id="br" type="range" min="-100" max="100" value="0"><b id="brv">0</b></div><div class="range"><span>Contrast</span><input id="co" type="range" min="-100" max="100" value="0"><b id="cov">0</b></div><div class="range"><span>Saturation</span><input id="sa" type="range" min="-100" max="100" value="0"><b id="sav">0</b></div><label>Background</label><select id="bg" onchange="photo()"><option value="#fff">White</option><option value="#eef2f7">Light Gray</option><option value="#dbeafe">Studio Blue</option><option value="#e0f2fe">Soft Sky</option></select></div>
-<button class="btn blue" onclick="photo()">GENERATE A4 SHEET</button><button class="btn green" onclick="download()">DOWNLOAD PNG</button><button class="btn dark" onclick="printIt()">PRINT A4</button><div class="status" id="ps">Add photos.</div></div><div class="panel"><h3>A4 Preview</h3><div class="preview"><canvas id="pc"></canvas></div></div></div></section>
-<section id="id" class="module"><div class="grid"><div class="panel"><h3>ID Card Studio</h3><div class="presets"><button id="pdfb" class="preset active" onclick="mode('pdf')">📄 PDF / Document</button><button id="pairb" class="preset" onclick="mode('pair')">🖼️ Front + Back</button><button id="singleb" class="preset" onclick="mode('single')">🖼️ Single Side</button></div>
-<div id="pdfbox" class="section"><div class="upload">PDF / JPG / PNG / WEBP / GIF / BMP / TIFF<br><br><input id="doc" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tif,.tiff,application/pdf,image/*" onchange="documentUpload(this)"></div></div><div id="pairbox" class="section" style="display:none"><div class="upload">Front + Back<br><br><input type="file" accept="image/*" multiple onchange="pair(this)"></div></div><div id="singlebox" class="section" style="display:none"><div class="upload">Single Side<br><br><input type="file" accept="image/*" onchange="single(this)"></div></div><div id="ids"></div>
-<label>Layout</label><select id="layout" onchange="idSheet()"><option value="auto">Auto</option><option value="side">Front + Back — Side by Side</option><option value="top">Front + Back — Top & Bottom</option><option value="front">Front Only</option><option value="back">Back Only</option></select><label>Card Size</label><select><option>85.60 × 54 mm Standard</option></select><div class="row"><div><label>Margin</label><input id="im" type="number" value="5" onchange="idSheet()"></div><div><label>Gap</label><input id="ig" type="number" value="3" onchange="idSheet()"></div></div><label>Paper</label><select id="io" onchange="idSheet()"><option value="p">A4 Portrait</option><option value="l">A4 Landscape</option></select><label>Border</label><select id="ib" onchange="idSheet()"><option value="1">ON</option><option value="0">OFF</option></select><div class="section note">One PDF may contain Front + Back pages. Separate images can be added with Front + Back. Top/Bottom cards have a dedicated layout. Original image quality is not intentionally compressed.</div><button class="btn blue" onclick="idSheet()">GENERATE A4 SHEET</button><button class="btn green" onclick="download()">DOWNLOAD PNG</button><button class="btn dark" onclick="printIt()">PRINT A4</button><div class="status" id="is">Upload ID.</div></div><div class="panel"><h3>A4 Preview</h3><div class="preview"><canvas id="ic"></canvas></div></div></div></section></main>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD Kaif Print Studio</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f1f5f9;
+    color:#172033;
+}
+
+header{
+    background:#111827;
+    color:#fff;
+    padding:18px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    margin:0;
+    font-size:25px;
+}
+
+header small{
+    opacity:.75;
+}
+
+.container{
+    max-width:1250px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab{
+    padding:13px 25px;
+    border:0;
+    border-radius:10px;
+    background:#dbe3ef;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.tab.active{
+    background:#2563eb;
+    color:white;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+h2{
+    margin:0 0 18px;
+}
+
+h3{
+    margin-top:0;
+}
+
+.upload{
+    border:2px dashed #94a3b8;
+    border-radius:13px;
+    padding:40px 20px;
+    text-align:center;
+    cursor:pointer;
+    display:block;
+}
+
+.upload:hover{
+    border-color:#2563eb;
+    background:#f8fbff;
+}
+
+.upload strong{
+    font-size:18px;
+}
+
+input[type=file]{
+    display:none;
+}
+
+button{
+    border:0;
+    border-radius:8px;
+    padding:10px 16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.primary{
+    background:#2563eb;
+    color:white;
+}
+
+.green{
+    background:#16a34a;
+    color:white;
+}
+
+.dark{
+    background:#111827;
+    color:white;
+}
+
+.gray{
+    background:#e2e8f0;
+}
+
+.red{
+    background:#dc2626;
+    color:white;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:15px;
+}
+
+.choice{
+    padding:10px 14px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+}
+
+.choice.active{
+    border-color:#2563eb;
+    background:#eff6ff;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:14px 0;
+}
+
+input,select{
+    padding:10px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+}
+
+.status{
+    margin-top:10px;
+    font-size:13px;
+    color:#64748b;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* EDITOR */
+
+.editor{
+    background:#111827;
+    border-radius:12px;
+    padding:20px;
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:auto;
+}
+
+#photoCanvas,
+#idCanvas{
+    max-width:100%;
+    max-height:600px;
+    background:white;
+    touch-action:none;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+/* SLIDERS */
+
+.slider{
+    display:grid;
+    grid-template-columns:100px 1fr 45px;
+    gap:8px;
+    align-items:center;
+    margin:10px 0;
+}
+
+.slider input{
+    padding:0;
+}
+
+/* TWO COLUMN */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* PREVIEW */
+
+.preview{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:15px;
+}
+
+.thumb{
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    padding:8px;
+    background:#f8fafc;
+}
+
+.thumb img{
+    width:100%;
+    aspect-ratio:1.6/1;
+    object-fit:cover;
+    background:white;
+}
+
+/* A4 */
+
+.a4wrap{
+    background:#cbd5e1;
+    padding:25px;
+    overflow:auto;
+}
+
+.a4{
+    width:794px;
+    min-height:1123px;
+    background:white;
+    margin:auto;
+    padding:35px;
+    display:grid;
+    align-content:start;
+    gap:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+
+.print-photo{
+    border:1px solid #aaa;
+    padding:2px;
+    background:white;
+    overflow:hidden;
+}
+
+.print-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ID CROP */
+
+.crop-wrapper{
+    position:relative;
+    display:inline-block;
+}
+
+.selection{
+    position:absolute;
+    border:2px solid #00ff88;
+    background:#00ff8820;
+    display:none;
+    pointer-events:none;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+}
+
+/* PRINT */
+
+@media print{
+
+    body *{
+        visibility:hidden;
+    }
+
+    #printArea,
+    #printArea *{
+        visibility:visible;
+    }
+
+    #printArea{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+
+    .a4wrap{
+        padding:0;
+        background:white;
+    }
+
+    .a4{
+        box-shadow:none;
+        width:210mm;
+        min-height:297mm;
+        padding:10mm;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div>
+<h1>MD Kaif Print Studio</h1>
+<small>Professional Photo & ID Printing System</small>
+</div>
+
+<div>
+Designed by <b>MDKF</b>
+</div>
+
+</header>
+
+
+<div class="container">
+
+<!-- TABS -->
+
+<div class="tabs">
+
+<button class="tab active" onclick="openTab('photo',this)">
+📸 Photo Studio
+</button>
+
+<button class="tab" onclick="openTab('id',this)">
+🪪 ID Card
+</button>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- PHOTO STUDIO -->
+<!-- ================================================= -->
+
+<section id="photo">
+
+<div class="card">
+
+<h2>1. Upload Photo</h2>
+
+<label class="upload" for="photoInput">
+
+<strong>📁 Upload Photo</strong>
+
+<br><br>
+
+JPG • JPEG • PNG • WebP
+
+<br>
+
+<small>
+Original high-resolution photo will be preserved for final print
+</small>
+
+</label>
+
+<input
+type="file"
+id="photoInput"
+accept=".jpg,.jpeg,.png,.webp"
+>
+
+<div id="photoStatus" class="status">
+No photo selected
+</div>
+
+</div>
+
+
+<!-- PHOTO EDITOR -->
+
+<div id="photoEditor" class="card hidden">
+
+<h2>2. Photo Editing</h2>
+
+<div class="toolbar">
+
+<button class="gray" onclick="undoPhoto()">
+↶ Undo
+</button>
+
+<button class="gray" onclick="redoPhoto()">
+↷ Redo
+</button>
+
+<button class="gray" onclick="rotatePhoto()">
+🔄 Rotate
+</button>
+
+<button class="gray" onclick="resetPhoto()">
+Reset
+</button>
+
+<button class="primary" onclick="squareCrop()">
+✂ 1:1 Crop
+</button>
+
+</div>
+
+
+<div class="editor">
+
+<canvas id="photoCanvas"></canvas>
+
+</div>
+
+
+<div class="grid">
+
+<!-- FINISH -->
+
+<div>
+
+<h3>✨ Finish</h3>
+
+<div class="options">
+
+<div class="choice active finish"
+data-value="natural">
+Natural Finish
+</div>
+
+<div class="choice finish"
+data-value="crystal">
+Crystal Clear
+</div>
+
+<div class="choice finish"
+data-value="studio">
+Studio Style
+</div>
+
+<div class="choice finish"
+data-value="shine">
+Shine
+</div>
+
+<div class="choice finish"
+data-value="lab">
+Lab Type Shine
+</div>
+
+<div class="choice finish"
+data-value="smooth">
+Smooth Finish
+</div>
+
+<div class="choice finish"
+data-value="hd">
+HD Enhance
+</div>
+
+<div class="choice finish"
+data-value="custom">
+Custom
+</div>
+
+</div>
+
+
+<div class="slider">
+
+<span>Brightness</span>
+
+<input
+type="range"
+id="brightness"
+min="-50"
+max="50"
+value="0"
+>
+
+<span id="brightnessValue">0</span>
+
+</div>
+
+
+<div class="slider">
+
+<span>Contrast</span>
+
+<input
+type="range"
+id="contrast"
+min="-50"
+max="50"
+value="0"
+>
+
+<span id="contrastValue">0</span>
+
+</div>
+
+
+<div class="slider">
+
+<span>Sharpness</span>
+
+<input
+type="range"
+id="sharpness"
+min="0"
+max="100"
+value="20"
+>
+
+<span id="sharpnessValue">20</span>
+
+</div>
+
+
+<div class="slider">
+
+<span>Smoothness</span>
+
+<input
+type="range"
+id="smoothness"
+min="0"
+max="100"
+value="0"
+>
+
+<span id="smoothnessValue">0</span>
+
+</div>
+
+</div>
+
+
+<!-- BACKGROUND -->
+
+<div>
+
+<h3>🎨 Background</h3>
+
+<div class="options">
+
+<div class="choice active bg"
+data-value="original">
+Original
+</div>
+
+<div class="choice bg"
+data-value="white">
+White
+</div>
+
+<div class="choice bg"
+data-value="blue">
+Light Blue
+</div>
+
+<div class="choice bg"
+data-value="gray">
+Grey
+</div>
+
+<div class="choice bg"
+data-value="custom">
+Custom
+</div>
+
+</div>
+
+
+<div class="row">
+
+<label>Custom Color</label>
+
+<input
+type="color"
+id="backgroundColor"
+value="#ffffff"
+>
+
+</div>
+
+<small>
+Background replacement option is included. AI-level automatic
+hair/person segmentation can be connected in the production version.
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SIZE -->
+
+<div class="card">
+
+<h2>3. Photo Size & Quantity</h2>
+
+
+<div class="options">
+
+<div
+class="choice size active"
+data-w="35"
+data-h="45"
+>
+Passport 35×45 mm
+</div>
+
+
+<div
+class="choice size"
+data-w="25"
+data-h="35"
+>
+Small 25×35 mm
+</div>
+
+
+<div
+class="choice size"
+data-w="50"
+data-h="50"
+>
+Album 50×50 mm
+</div>
+
+
+<div
+class="choice size"
+data-w="60"
+data-h="90"
+>
+Album 60×90 mm
+</div>
+
+
+<div
+class="choice size"
+data-w="custom"
+data-h="custom"
+>
+Custom Size
+</div>
+
+</div>
+
+
+<div class="row">
+
+<label>
+Width
+</label>
+
+<input
+type="number"
+id="photoWidth"
+value="35"
+min="5"
+>
+
+<label>
+mm
+</label>
+
+
+<label>
+Height
+</label>
+
+<input
+type="number"
+id="photoHeight"
+value="45"
+min="5"
+>
+
+<label>
+mm
+</label>
+
+
+<label>
+Quantity
+</label>
+
+<input
+type="number"
+id="photoQuantity"
+value="30"
+min="1"
+max="200"
+>
+
+<button
+class="green"
+onclick="generatePhotoA4()"
+>
+Generate A4
+</button>
+
+</div>
+
+
+<div class="status">
+
+Example:
+Passport Size → Quantity 30 → Generate A4.
+System automatically calculates the A4 layout.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- ID CARD -->
+<!-- ================================================= -->
+
+<section id="id" class="hidden">
+
+<div class="card">
+
+<h2>🪪 ID Card Upload</h2>
+
+
+<label class="upload" for="idInput">
+
+<strong>📁 Upload ID</strong>
+
+<br><br>
+
+PDF • JPG • JPEG • PNG • WebP
+
+<br>
+
+<small>
+One file can contain Front + Back
+</small>
+
+</label>
+
+
+<input
+type="file"
+id="idInput"
+accept=".pdf,.jpg,.jpeg,.png,.webp"
+>
+
+
+<div class="options">
+
+<div
+class="choice active idMode"
+data-mode="front"
+>
+Front Only
+</div>
+
+<div
+class="choice idMode"
+data-mode="back"
+>
+Back Only
+</div>
+
+<div
+class="choice idMode"
+data-mode="both"
+>
+Front + Back
+</div>
+
+</div>
+
+
+<div id="idStatus" class="status">
+No file selected
+</div>
+
+</div>
+
+
+<div id="idCropCard" class="card hidden">
+
+<h2>2. Crop ID Printing Area</h2>
+
+
+<div class="toolbar">
+
+<button class="gray" onclick="resetIdCrop()">
+Reset
+</button>
+
+<button
+class="green"
+onclick="applyIdCrop()"
+>
+✓ Apply Crop
+</button>
+
+</div>
+
+
+<div class="editor">
+
+<div
+class="crop-wrapper"
+id="cropWrapper"
+>
+
+<canvas id="idCanvas"></canvas>
+
+<div
+id="selection"
+class="selection"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="status">
+
+Mouse se drag karke sirf ID card ka required portion select karein.
+
+</div>
+
+</div>
+
+
+<div id="idPreviewCard" class="card hidden">
+
+<h2>3. ID Preview</h2>
+
+<div
+id="idPreview"
+class="preview"
+></div>
+
+
+<div class="row">
+
+<label>
+Quantity
+</label>
+
+<input
+type="number"
+id="idQuantity"
+value="6"
+min="1"
+>
+
+<button
+class="green"
+onclick="generateIdA4()"
+>
+Generate A4
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- A4 PRINT -->
+<!-- ================================================= -->
+
+<div
+id="printArea"
+class="card hidden"
+>
+
+<h2>
+🖨 A4 Print Preview
+</h2>
+
+
+<div class="a4wrap">
+
+<div
+id="a4"
+class="a4"
+></div>
+
+</div>
+
+
+<div class="row">
+
+<button
+class="dark"
+onclick="window.print()"
+>
+🖨 Print
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
 <script>
-const D=300,mm=x=>Math.round(x*D/25.4),A={p:[2480,3508],l:[3508,2480]};let P=[],I=[],cur=null;
-const $=x=>document.getElementById(x);
-function tab(n,b){document.querySelectorAll('.module').forEach(x=>x.classList.remove('show'));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));$(n).classList.add('show');b.classList.add('active');cur=$(n==='photo'?'pc':'ic')}
-function read(f,cb){let r=new FileReader;r.onload=e=>{let i=new Image;i.onload=()=>cb(i,f.name);i.src=e.target.result};r.readAsDataURL(f)}
-function addPhoto(e){let f=e.files[0];if(!f)return;read(f,(i,n)=>{P.push({i,n,q:1});renderP();photo()});e.value=''}
-function renderP(){$('people').innerHTML=P.map((p,i)=>`<div class="person"><div class="personhead"><b>Person ${i+1}</b><button class="remove" onclick="P.splice(${i},1);renderP();photo()">Remove</button></div>${p.n}<label>Quantity</label><input type="number" min="1" value="${p.q}" onchange="P[${i}].q=+this.value||1;photo()"></div>`).join('')}
-function filter(){return`brightness(${100+ +$('br').value}%) contrast(${100+ +$('co').value}%) saturate(${100+ +$('sa').value}%)`}
-function photo(){if(!P.length)return;$('brv').textContent=$('br').value;$('cov').textContent=$('co').value;$('sav').textContent=$('sa').value;let [W,H]=A[$('orient').value],c=$('pc'),x=c.getContext('2d');c.width=W;c.height=H;x.fillStyle=$('bg').value;x.fillRect(0,0,W,H);let z=$('size').value.split(',').map(Number),w=mm(z[0]),h=mm(z[1]),m=mm(+$('margin').value||0),g=mm(+$('gap').value||0),cols=Math.floor((W-2*m+g)/(w+g)),rows=Math.floor((H-2*m+g)/(h+g)),cap=cols*rows,s=0,total=0;P.forEach(p=>total+=p.q);P.forEach(p=>{for(let q=0;q<p.q&&s<cap;q++){let xx=m+s%cols*(w+g),yy=m+Math.floor(s/cols)*(h+g);x.save();x.beginPath();x.rect(xx,yy,w,h);x.clip();x.filter=filter();let sc=Math.max(w/p.i.naturalWidth,h/p.i.naturalHeight);x.drawImage(p.i,xx+(w-p.i.naturalWidth*sc)/2,yy+(h-p.i.naturalHeight*sc)/2,p.i.naturalWidth*sc,p.i.naturalHeight*sc);x.restore();if($('border').value==='1')x.strokeRect(xx,yy,w,h);s++}});cur=c;$('ps').textContent=`${total} requested • ${cap} fit on one A4`}
-function preset(a,b,c){$('br').value=a;$('co').value=b;$('sa').value=c;photo()}
-function mode(m){['pdfbox','pairbox','singlebox'].forEach(x=>$(x).style.display='none');$(m==='pdf'?'pdfbox':m==='pair'?'pairbox':'singlebox').style.display='block';['pdfb','pairb','singleb'].forEach(x=>$(x).classList.remove('active'));$(m==='pdf'?'pdfb':m==='pair'?'pairb':'singleb').classList.add('active')}
-function pair(e){let f=[...e.files];for(let k=0;k<f.length;k+=2){let o={front:null,back:null,n:f[k].name,q:1};I.push(o);read(f[k],i=>{o.front=i;idSheet()});if(f[k+1])read(f[k+1],i=>{o.back=i;idSheet()})}renderI();e.value=''}
-function single(e){let f=e.files[0];if(!f)return;read(f,(i,n)=>{I.push({front:i,back:null,n,q:1});renderI();idSheet()});e.value=''}
-function documentUpload(e){let f=e.files[0];if(!f)return;if(/\.pdf$/i.test(f.name)||f.type==='application/pdf'){$('is').textContent='PDF accepted. Direct PDF page rendering requires PDF.js to be bundled in the final offline build.';I.push({pdf:true,n:f.name,q:1});renderI()}else single(e);e.value=''}
-function renderI(){$('ids').innerHTML=I.map((o,i)=>`<div class="person"><div class="personhead"><b>ID ${i+1}</b><button class="remove" onclick="I.splice(${i},1);renderI();idSheet()">Remove</button></div>${o.n}<label>Quantity</label><input type="number" min="1" value="${o.q}" onchange="I[${i}].q=+this.value||1;idSheet()"></div>`).join('')}
-function idSheet(){if(!I.length)return;let [W,H]=A[$('io').value],c=$('ic'),x=c.getContext('2d');c.width=W;c.height=H;x.fillStyle='#fff';x.fillRect(0,0,W,H);let w=mm(85.6),h=mm(54),m=mm(+$('im').value||0),g=mm(+$('ig').value||0),cols=Math.floor((W-2*m+g)/(w+g)),rows=Math.floor((H-2*m+g)/(h+g)),col=0,row=0,count=0;function put(i){if(!i||row>=rows)return;let xx=m+col*(w+g),yy=m+row*(h+g),sc=Math.max(w/i.naturalWidth,h/i.naturalHeight);x.drawImage(i,xx+(w-i.naturalWidth*sc)/2,yy+(h-i.naturalHeight*sc)/2,i.naturalWidth*sc,i.naturalHeight*sc);if($('ib').value==='1')x.strokeRect(xx,yy,w,h);col++;count++;if(col>=cols){col=0;row++}}I.forEach(o=>{if(o.pdf)return;for(let q=0;q<o.q;q++){let l=$('layout').value;if(l==='front')put(o.front);else if(l==='back')put(o.back);else{put(o.front);put(o.back)}}});cur=c;$('is').textContent=`${count} card side(s) placed • 85.6 × 54 mm`}
-function download(){if(!cur)return alert('Generate sheet first');cur.toBlob(b=>{let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='MD_Kaif_A4_Print.png';a.click()},'image/png')}
-function printIt(){if(!cur)return alert('Generate sheet first');let u=cur.toDataURL('image/png'),l=cur.width>cur.height,w=open();w.document.write(`<style>@page{size:A4 ${l?'landscape':'portrait'};margin:0}body{margin:0}img{width:${l?'297':'210'}mm;height:${l?'210':'297'}mm}</style><img src="${u}"><script>onload=()=>print()<\/script>`);w.document.close()}
-cur=$('pc');
-</script></body></html>
+
+/* ============================================
+   TAB SYSTEM
+============================================ */
+
+function openTab(tab,button){
+
+document.getElementById("photo")
+.classList.toggle("hidden",tab!=="photo");
+
+document.getElementById("id")
+.classList.toggle("hidden",tab!=="id");
+
+document.querySelectorAll(".tab")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+}
+
+
+
+/* ============================================
+   PHOTO SYSTEM
+============================================ */
+
+let photoImage=null;
+
+let photoRotation=0;
+
+let photoHistory=[];
+
+let photoRedo=[];
+
+let finish="natural";
+
+let background="original";
+
+const photoCanvas=
+document.getElementById("photoCanvas");
+
+const photoCtx=
+photoCanvas.getContext("2d");
+
+
+document.getElementById("photoInput")
+.addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+const url=
+URL.createObjectURL(file);
+
+const img=
+new Image();
+
+img.onload=function(){
+
+photoImage=img;
+
+photoRotation=0;
+
+photoHistory=[];
+
+photoRedo=[];
+
+drawPhoto();
+
+document
+.getElementById("photoEditor")
+.classList.remove("hidden");
+
+document
+.getElementById("photoStatus")
+.innerText=
+file.name+
+" • "+
+img.naturalWidth+
+" × "+
+img.naturalHeight+
+" px";
+
+URL.revokeObjectURL(url);
+
+};
+
+img.src=url;
+
+});
+
+
+
+function filterValue(){
+
+let b=
+Number(document.getElementById("brightness").value);
+
+let c=
+Number(document.getElementById("contrast").value);
+
+let s=
+Number(document.getElementById("sharpness").value);
+
+
+let sat=100;
+
+if(finish==="crystal")sat=112;
+
+if(finish==="studio")sat=108;
+
+if(finish==="shine")sat=112;
+
+if(finish==="lab")sat=118;
+
+if(finish==="hd")sat=120;
+
+
+return `
+brightness(${100+b}%)
+contrast(${100+c}%)
+saturate(${sat}%)
+`;
+
+}
+
+
+
+function drawPhoto(){
+
+if(!photoImage)return;
+
+
+const max=1800;
+
+let scale=
+Math.min(
+1,
+max/photoImage.naturalWidth,
+max/photoImage.naturalHeight
+);
+
+
+let w=
+Math.round(photoImage.naturalWidth*scale);
+
+let h=
+Math.round(photoImage.naturalHeight*scale);
+
+
+if(photoRotation%180!==0){
+
+[w,h]=[h,w];
+
+}
+
+
+photoCanvas.width=w;
+
+photoCanvas.height=h;
+
+
+photoCtx.save();
+
+photoCtx.clearRect(
+0,
+0,
+w,
+h
+);
+
+
+photoCtx.translate(
+w/2,
+h/2
+);
+
+
+photoCtx.rotate(
+photoRotation*Math.PI/180
+);
+
+
+photoCtx.filter=
+filterValue();
+
+
+let iw=
+photoImage.naturalWidth*scale;
+
+let ih=
+photoImage.naturalHeight*scale;
+
+
+photoCtx.drawImage(
+photoImage,
+-iw/2,
+-ih/2,
+iw,
+ih
+);
+
+
+photoCtx.restore();
+
+
+applyBackground();
+
+}
+
+
+
+function applyBackground(){
+
+if(background==="original")
+return;
+
+
+photoCtx.save();
+
+photoCtx.globalCompositeOperation=
+"destination-over";
+
+
+let color="#ffffff";
+
+
+if(background==="blue")
+color="#dff2ff";
+
+if(background==="gray")
+color="#e5e7eb";
+
+if(background==="custom")
+color=
+document.getElementById("backgroundColor").value;
+
+
+photoCtx.fillStyle=color;
+
+photoCtx.fillRect(
+0,
+0,
+photoCanvas.width,
+photoCanvas.height
+);
+
+photoCtx.restore();
+
+}
+
+
+
+/* FINISH */
+
+document.querySelectorAll(".finish")
+.forEach(x=>{
+
+x.onclick=()=>{
+
+document
+.querySelectorAll(".finish")
+.forEach(a=>
+a.classList.remove("active")
+);
+
+x.classList.add("active");
+
+finish=x.dataset.value;
+
+drawPhoto();
+
+};
+
+});
+
+
+
+/* BACKGROUND */
+
+document.querySelectorAll(".bg")
+.forEach(x=>{
+
+x.onclick=()=>{
+
+document
+.querySelectorAll(".bg")
+.forEach(a=>
+a.classList.remove("active")
+);
+
+x.classList.add("active");
+
+background=x.dataset.value;
+
+drawPhoto();
+
+};
+
+});
+
+
+document.getElementById("backgroundColor")
+.oninput=drawPhoto;
+
+
+
+/* SLIDERS */
+
+const sliders=[
+["brightness","brightnessValue"],
+["contrast","contrastValue"],
+["sharpness","sharpnessValue"],
+["smoothness","smoothnessValue"]
+];
+
+
+sliders.forEach(item=>{
+
+document.getElementById(item[0])
+.addEventListener("input",function(){
+
+document.getElementById(item[1])
+.innerText=this.value;
+
+drawPhoto();
+
+});
+
+});
+
+
+
+/* SAVE HISTORY */
+
+function savePhotoState(){
+
+if(!photoCanvas.width)return;
+
+photoHistory.push(
+photoCanvas.toDataURL("image/png")
+);
+
+if(photoHistory.length>20)
+photoHistory.shift();
+
+photoRedo=[];
+
+}
+
+
+
+function undoPhoto(){
+
+if(!photoHistory.length)
+return;
+
+photoRedo.push(
+photoCanvas.toDataURL()
+);
+
+const data=
+photoHistory.pop();
+
+restoreCanvas(data);
+
+}
+
+
+
+function redoPhoto(){
+
+if(!photoRedo.length)
+return;
+
+photoHistory.push(
+photoCanvas.toDataURL()
+);
+
+const data=
+photoRedo.pop();
+
+restoreCanvas(data);
+
+}
+
+
+
+function restoreCanvas(data){
+
+const img=
+new Image();
+
+img.onload=function(){
+
+photoCanvas.width=
+img.width;
+
+photoCanvas.height=
+img.height;
+
+photoCtx.drawImage(
+img,
+0,
+0
+);
+
+};
+
+img.src=data;
+
+}
+
+
+
+function rotatePhoto(){
+
+savePhotoState();
+
+photoRotation=
+(photoRotation+90)%360;
+
+drawPhoto();
+
+}
+
+
+
+function resetPhoto(){
+
+photoRotation=0;
+
+document.getElementById("brightness").value=0;
+
+document.getElementById("contrast").value=0;
+
+document.getElementById("sharpness").value=20;
+
+document.getElementById("smoothness").value=0;
+
+background="original";
+
+finish="natural";
+
+drawPhoto();
+
+}
+
+
+
+function squareCrop(){
+
+if(!photoCanvas.width)return;
+
+savePhotoState();
+
+
+let n=
+Math.min(
+photoCanvas.width,
+photoCanvas.height
+);
+
+
+let x=
+(photoCanvas.width-n)/2;
+
+let y=
+(photoCanvas.height-n)/2;
+
+
+let temp=
+document.createElement("canvas");
+
+temp.width=n;
+
+temp.height=n;
+
+
+temp.getContext("2d")
+.drawImage(
+photoCanvas,
+x,
+y,
+n,
+n,
+0,
+0,
+n,
+n
+);
+
+
+const img=
+new Image();
+
+img.onload=function(){
+
+photoImage=img;
+
+photoRotation=0;
+
+drawPhoto();
+
+};
+
+img.src=
+temp.toDataURL("image/png");
+
+}
+
+
+
+/* ============================================
+   PHOTO SIZE
+============================================ */
+
+document.querySelectorAll(".size")
+.forEach(x=>{
+
+x.onclick=()=>{
+
+document
+.querySelectorAll(".size")
+.forEach(a=>
+a.classList.remove("active")
+);
+
+x.classList.add("active");
+
+
+if(x.dataset.w!=="custom"){
+
+document.getElementById("photoWidth")
+.value=x.dataset.w;
+
+document.getElementById("photoHeight")
+.value=x.dataset.h;
+
+}
+
+};
+
+});
+
+
+
+function mmToPx(mm){
+
+return Math.round(
+mm*3.779527559
+);
+
+}
+
+
+
+function generatePhotoA4(){
+
+if(!photoCanvas.width){
+
+alert("Please upload a photo first.");
+
+return;
+
+}
+
+
+let width=
+Number(
+document.getElementById("photoWidth").value
+);
+
+let height=
+Number(
+document.getElementById("photoHeight").value
+);
+
+let quantity=
+Number(
+document.getElementById("photoQuantity").value
+);
+
+
+if(width<=0||height<=0||quantity<=0)
+return;
+
+
+const a4=
+document.getElementById("a4");
+
+a4.innerHTML="";
+
+
+const A4W=794;
+
+const A4H=1123;
+
+const padding=35;
+
+const gap=12;
+
+
+const pw=
+mmToPx(width);
+
+const ph=
+mmToPx(height);
+
+
+let cols=
+Math.floor(
+(A4W-2*padding+gap)/
+(pw+gap)
+);
+
+
+let rows=
+Math.floor(
+(A4H-2*padding+gap)/
+(ph+gap)
+);
+
+
+if(cols<1)cols=1;
+
+if(rows<1)rows=1;
+
+
+let max=
+cols*rows;
+
+
+const finalImage=
+photoCanvas.toDataURL(
+"image/jpeg",
+1.0
+);
+
+
+for(
+let i=0;
+i<Math.min(quantity,max);
+i++
+){
+
+const div=
+document.createElement("div");
+
+div.className=
+"print-photo";
+
+div.style.width=
+pw+"px";
+
+div.style.height=
+ph+"px";
+
+
+const img=
+document.createElement("img");
+
+img.src=finalImage;
+
+
+div.appendChild(img);
+
+a4.appendChild(div);
+
+}
+
+
+document
+.getElementById("printArea")
+.classList.remove("hidden");
+
+
+document
+.getElementById("printArea")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+
+if(quantity>max){
+
+alert(
+"Selected size ke according ek A4 par "+
+max+
+" photos fit ho rahe hain. Baaki next sheet mein jayenge."
+);
+
+}
+
+}
+
+
+
+/* ============================================
+   ID CARD
+============================================ */
+
+let idMode="front";
+
+let idFront=null;
+
+let idBack=null;
+
+let idFile=null;
+
+
+document.querySelectorAll(".idMode")
+.forEach(x=>{
+
+x.onclick=()=>{
+
+document
+.querySelectorAll(".idMode")
+.forEach(a=>
+a.classList.remove("active")
+);
+
+x.classList.add("active");
+
+idMode=x.dataset.mode;
+
+};
+
+});
+
+
+
+document.getElementById("idInput")
+.addEventListener("change",function(){
+
+idFile=this.files[0];
+
+if(!idFile)return;
+
+
+document
+.getElementById("idCropCard")
+.classList.remove("hidden");
+
+
+document
+.getElementById("idStatus")
+.innerText=
+idFile.name;
+
+
+if(
+idFile.type==="application/pdf"
+){
+
+alert(
+"PDF upload detected. Image crop is active in this standalone version. Production version mein PDF.js se multi-page Front/Back automatic processing add kiya ja sakta hai."
+);
+
+return;
+
+}
+
+
+const url=
+URL.createObjectURL(idFile);
+
+const img=
+new Image();
+
+img.onload=function(){
+
+const c=
+document.getElementById("idCanvas");
+
+const ctx=
+c.getContext("2d");
+
+
+c.width=
+img.naturalWidth;
+
+c.height=
+img.naturalHeight;
+
+
+ctx.drawImage(
+img,
+0,
+0
+);
+
+
+URL.revokeObjectURL(url);
+
+resetIdCrop();
+
+};
+
+img.src=url;
+
+});
+
+
+
+/* ID CROP */
+
+let selecting=false;
+
+let startX=0;
+
+let startY=0;
+
+
+const idCanvas=
+document.getElementById("idCanvas");
+
+const idWrapper=
+document.getElementById("cropWrapper");
+
+const selection=
+document.getElementById("selection");
+
+
+function pointerPosition(e){
+
+const rect=
+idCanvas.getBoundingClientRect();
+
+return{
+
+x:
+(e.clientX-rect.left)
+*
+idCanvas.width/
+rect.width,
+
+y:
+(e.clientY-rect.top)
+*
+idCanvas.height/
+rect.height
+
+};
+
+}
+
+
+
+idWrapper.addEventListener(
+"pointerdown",
+function(e){
+
+const p=
+pointerPosition(e);
+
+startX=p.x;
+
+startY=p.y;
+
+selecting=true;
+
+selection.style.display="block";
+
+});
+
+
+
+idWrapper.addEventListener(
+"pointermove",
+function(e){
+
+if(!selecting)return;
+
+const p=
+pointerPosition(e);
+
+
+let x=
+Math.min(
+startX,
+p.x
+);
+
+let y=
+Math.min(
+startY,
+p.y
+);
+
+let w=
+Math.abs(
+p.x-startX
+);
+
+let h=
+Math.abs(
+p.y-startY
+);
+
+
+const r=
+idCanvas.getBoundingClientRect();
+
+
+selection.style.left=
+x*r.width/idCanvas.width+"px";
+
+selection.style.top=
+y*r.height/idCanvas.height+"px";
+
+selection.style.width=
+w*r.width/idCanvas.width+"px";
+
+selection.style.height=
+h*r.height/idCanvas.height+"px";
+
+});
+
+
+
+idWrapper.addEventListener(
+"pointerup",
+function(){
+
+selecting=false;
+
+});
+
+
+
+function resetIdCrop(){
+
+selection.style.display="none";
+
+}
+
+
+
+function applyIdCrop(){
+
+if(!idCanvas.width)return;
+
+
+const r=
+idCanvas.getBoundingClientRect();
+
+
+let left=
+parseFloat(
+selection.style.left||0
+);
+
+let top=
+parseFloat(
+selection.style.top||0
+);
+
+let width=
+parseFloat(
+selection.style.width||r.width
+);
+
+let height=
+parseFloat(
+selection.style.height||r.height
+);
+
+
+let sx=
+left*idCanvas.width/r.width;
+
+let sy=
+top*idCanvas.height/r.height;
+
+let sw=
+width*idCanvas.width/r.width;
+
+let sh=
+height*idCanvas.height/r.height;
+
+
+if(sw<10||sh<10){
+
+sx=0;
+
+sy=0;
+
+sw=idCanvas.width;
+
+sh=idCanvas.height;
+
+}
+
+
+const output=
+document.createElement("canvas");
+
+output.width=sw;
+
+output.height=sh;
+
+
+output
+.getContext("2d")
+.drawImage(
+idCanvas,
+sx,
+sy,
+sw,
+sh,
+0,
+0,
+sw,
+sh
+);
+
+
+const image=
+output.toDataURL(
+"image/jpeg",
+1.0
+);
+
+
+if(idMode==="front"){
+
+idFront=image;
+
+}
+
+else if(idMode==="back"){
+
+idBack=image;
+
+}
+
+else{
+
+if(!idFront){
+
+idFront=image;
+
+}else{
+
+idBack=image;
+
+}
+
+}
+
+
+updateIdPreview();
+
+resetIdCrop();
+
+}
+
+
+
+function updateIdPreview(){
+
+const preview=
+document.getElementById("idPreview");
+
+preview.innerHTML="";
+
+
+if(idFront){
+
+preview.innerHTML+=`
+<div class="thumb">
+<img src="${idFront}">
+<br>
+<b>FRONT</b>
+</div>
+`;
+
+}
+
+
+if(idBack){
+
+preview.innerHTML+=`
+<div class="thumb">
+<img src="${idBack}">
+<br>
+<b>BACK</b>
+</div>
+`;
+
+}
+
+
+document
+.getElementById("idPreviewCard")
+.classList.remove("hidden");
+
+}
+
+
+
+function generateIdA4(){
+
+let qty=
+Number(
+document.getElementById("idQuantity").value
+);
+
+
+if(!idFront&&!idBack){
+
+alert("Please crop Front/Back first.");
+
+return;
+
+}
+
+
+const a4=
+document.getElementById("a4");
+
+a4.innerHTML="";
+
+
+let images=[];
+
+
+for(
+let i=0;
+i<qty;
+i++
+){
+
+if(idFront)
+images.push(idFront);
+
+if(idBack)
+images.push(idBack);
+
+}
+
+
+images.forEach(src=>{
+
+const div=
+document.createElement("div");
+
+div.className=
+"print-photo";
+
+div.style.width=
+"220px";
+
+div.style.height=
+"138px";
+
+
+const img=
+document.createElement("img");
+
+img.src=src;
+
+
+div.appendChild(img);
+
+a4.appendChild(div);
+
+});
+
+
+document
+.getElementById("printArea")
+.classList.remove("hidden");
+
+
+document
+.getElementById("printArea")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+</script>
+
+</body>
+</html>
+```
