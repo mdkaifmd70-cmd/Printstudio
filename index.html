@@ -1,317 +1,454 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MD Kaif Print Studio</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f1f5f9;
+    background:#f4f6f9;
     color:#172033;
 }
 
-header{
-    background:#111827;
-    color:#fff;
-    padding:18px 28px;
+/* HEADER */
+
+.header{
+    height:72px;
+    background:#ffffff;
+    border-bottom:1px solid #dfe4ea;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
 }
 
-header h1{
-    margin:0;
-    font-size:25px;
+.logo{
+    font-size:23px;
+    font-weight:800;
 }
 
-header small{
-    opacity:.75;
+.logo span{
+    color:#1769ff;
 }
+
+.designed{
+    font-size:12px;
+    color:#64748b;
+}
+
+/* MAIN */
 
 .container{
     max-width:1250px;
     margin:25px auto;
-    padding:0 15px;
+    padding:0 18px;
 }
 
-.tabs{
-    display:flex;
-    gap:10px;
+/* MODULE */
+
+.module-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
     margin-bottom:20px;
 }
 
-.tab{
-    padding:13px 25px;
-    border:0;
-    border-radius:10px;
-    background:#dbe3ef;
-    font-weight:bold;
+.module{
+    border:1px solid #dbe1e8;
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
     cursor:pointer;
+    text-align:left;
 }
 
-.tab.active{
-    background:#2563eb;
-    color:white;
+.module:hover{
+    border-color:#1769ff;
 }
+
+.module.active{
+    border:2px solid #1769ff;
+    background:#eff6ff;
+}
+
+.module-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.module-sub{
+    color:#64748b;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* CARD */
 
 .card{
-    background:white;
-    border-radius:15px;
-    padding:22px;
-    margin-bottom:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    background:#fff;
+    border:1px solid #dfe4ea;
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:18px;
 }
 
-h2{
-    margin:0 0 18px;
+.step{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:15px;
 }
 
-h3{
-    margin-top:0;
+.step-number{
+    display:inline-flex;
+    width:28px;
+    height:28px;
+    align-items:center;
+    justify-content:center;
+    background:#eaf1ff;
+    color:#1769ff;
+    border-radius:50%;
+    margin-right:8px;
 }
+
+/* UPLOAD */
 
 .upload{
-    border:2px dashed #94a3b8;
-    border-radius:13px;
-    padding:40px 20px;
+    min-height:150px;
+    border:2px dashed #9aa8b8;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
     cursor:pointer;
-    display:block;
+    background:#fbfdff;
 }
 
 .upload:hover{
-    border-color:#2563eb;
-    background:#f8fbff;
+    border-color:#1769ff;
+    background:#f5f9ff;
 }
 
-.upload strong{
+.upload-title{
     font-size:18px;
+    font-weight:800;
+}
+
+.upload-info{
+    margin-top:8px;
+    color:#64748b;
+    font-size:12px;
 }
 
 input[type=file]{
     display:none;
 }
 
+/* EDITOR */
+
+.editor-grid{
+    display:grid;
+    grid-template-columns:1.5fr .8fr;
+    gap:18px;
+}
+
+.preview{
+    background:#111827;
+    border-radius:12px;
+    min-height:470px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    overflow:hidden;
+}
+
+canvas{
+    max-width:100%;
+    max-height:600px;
+    display:block;
+    background:white;
+}
+
+/* PANEL */
+
+.panel{
+    border:1px solid #dfe4ea;
+    border-radius:12px;
+    padding:15px;
+    background:#fbfcfe;
+}
+
+.panel-section{
+    padding-top:14px;
+    margin-top:14px;
+    border-top:1px solid #e3e7ec;
+}
+
+.panel-title{
+    font-size:14px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+/* BUTTON */
+
+.buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
 button{
-    border:0;
+    font-family:inherit;
+}
+
+.btn{
+    border:1px solid #d5dce5;
+    background:white;
+    padding:9px 13px;
     border-radius:8px;
-    padding:10px 16px;
-    font-weight:bold;
+    font-weight:700;
     cursor:pointer;
 }
 
-.primary{
-    background:#2563eb;
-    color:white;
+.btn:hover{
+    border-color:#1769ff;
 }
 
-.green{
+.btn-primary{
+    background:#1769ff;
+    color:#fff;
+    border-color:#1769ff;
+}
+
+.btn-green{
     background:#16a34a;
     color:white;
+    border-color:#16a34a;
 }
 
-.dark{
+.btn-dark{
     background:#111827;
     color:white;
 }
 
-.gray{
-    background:#e2e8f0;
-}
-
-.red{
+.btn-danger{
     background:#dc2626;
     color:white;
 }
 
-.options{
+/* CHIPS */
+
+.chips{
     display:flex;
+    gap:7px;
     flex-wrap:wrap;
-    gap:9px;
-    margin-top:15px;
 }
 
-.choice{
-    padding:10px 14px;
-    border:1px solid #cbd5e1;
+.chip{
+    border:1px solid #d5dce5;
+    background:white;
+    padding:9px 11px;
     border-radius:8px;
-    background:#fff;
     cursor:pointer;
+    font-size:12px;
+    font-weight:700;
 }
 
-.choice.active{
-    border-color:#2563eb;
-    background:#eff6ff;
-    color:#2563eb;
-    font-weight:bold;
+.chip.active{
+    background:#1769ff;
+    border-color:#1769ff;
+    color:white;
 }
+
+/* CONTROLS */
 
 .row{
     display:flex;
-    align-items:center;
     gap:10px;
+    align-items:end;
     flex-wrap:wrap;
-    margin:14px 0;
 }
 
-input,select{
-    padding:10px;
-    border:1px solid #cbd5e1;
-    border-radius:7px;
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
 }
 
-.status{
-    margin-top:10px;
-    font-size:13px;
+.field label{
+    font-size:11px;
+    font-weight:800;
+}
+
+input[type=number],
+select{
+    height:38px;
+    border:1px solid #d5dce5;
+    border-radius:8px;
+    padding:0 9px;
+}
+
+/* RANGE */
+
+.range{
+    display:grid;
+    grid-template-columns:80px 1fr 35px;
+    align-items:center;
+    gap:8px;
+    margin:10px 0;
+    font-size:12px;
+}
+
+.range input{
+    width:100%;
+}
+
+/* INFO */
+
+.info{
     color:#64748b;
+    font-size:12px;
+    line-height:1.5;
 }
 
-.hidden{
-    display:none!important;
+.quality{
+    margin-top:12px;
+    padding:10px;
+    background:#effaf3;
+    border:1px solid #b8e1c5;
+    border-radius:9px;
+    font-size:12px;
 }
 
-/* EDITOR */
+/* ID */
 
-.editor{
+.id-grid{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:18px;
+}
+
+.crop-stage{
     background:#111827;
     border-radius:12px;
-    padding:20px;
-    min-height:430px;
+    min-height:470px;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:auto;
+    padding:15px;
+    overflow:hidden;
 }
 
-#photoCanvas,
-#idCanvas{
+.crop-wrapper{
+    position:relative;
+    display:inline-block;
+    line-height:0;
+}
+
+.crop-wrapper canvas{
     max-width:100%;
-    max-height:600px;
-    background:white;
-    touch-action:none;
+    max-height:540px;
 }
 
-/* TOOLBAR */
-
-.toolbar{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:15px;
+.crop-box{
+    position:absolute;
+    display:none;
+    border:2px solid #22c55e;
+    background:rgba(34,197,94,.15);
+    pointer-events:none;
 }
 
-/* SLIDERS */
+/* ID PREVIEW */
 
-.slider{
-    display:grid;
-    grid-template-columns:100px 1fr 45px;
-    gap:8px;
-    align-items:center;
-    margin:10px 0;
-}
-
-.slider input{
-    padding:0;
-}
-
-/* TWO COLUMN */
-
-.grid{
+.id-preview{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:20px;
+    gap:10px;
 }
 
-/* PREVIEW */
-
-.preview{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    gap:15px;
+.id-card-preview{
+    border:1px solid #dfe4ea;
+    border-radius:9px;
+    padding:7px;
 }
 
-.thumb{
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    padding:8px;
-    background:#f8fafc;
-}
-
-.thumb img{
+.id-card-preview img{
     width:100%;
-    aspect-ratio:1.6/1;
+    aspect-ratio:1.55;
     object-fit:cover;
-    background:white;
+    display:block;
+}
+
+.id-card-preview b{
+    font-size:11px;
 }
 
 /* A4 */
 
-.a4wrap{
-    background:#cbd5e1;
-    padding:25px;
+.a4-container{
+    background:#dce2e9;
+    padding:20px;
+    border-radius:12px;
     overflow:auto;
 }
 
 .a4{
     width:794px;
-    min-height:1123px;
+    height:1123px;
     background:white;
     margin:auto;
-    padding:35px;
+    padding:32px;
     display:grid;
     align-content:start;
-    gap:12px;
-    box-shadow:0 4px 20px rgba(0,0,0,.2);
+    justify-content:start;
+    gap:9px;
+    box-shadow:0 4px 18px rgba(0,0,0,.2);
 }
 
-.print-photo{
-    border:1px solid #aaa;
-    padding:2px;
+.print-item{
+    border:1px solid #999;
     background:white;
     overflow:hidden;
 }
 
-.print-photo img{
+.print-item img{
     width:100%;
     height:100%;
-    object-fit:cover;
     display:block;
+    object-fit:cover;
 }
 
-/* ID CROP */
+/* HIDDEN */
 
-.crop-wrapper{
-    position:relative;
-    display:inline-block;
-}
-
-.selection{
-    position:absolute;
-    border:2px solid #00ff88;
-    background:#00ff8820;
-    display:none;
-    pointer-events:none;
+.hidden{
+    display:none !important;
 }
 
 /* MOBILE */
 
-@media(max-width:800px){
+@media(max-width:900px){
 
-    .grid{
+    .editor-grid,
+    .id-grid{
         grid-template-columns:1fr;
     }
 
-    header{
-        flex-direction:column;
-        gap:8px;
-        text-align:center;
+    .module-tabs{
+        grid-template-columns:1fr;
     }
+
 }
 
 /* PRINT */
@@ -319,12 +456,12 @@ input,select{
 @media print{
 
     body *{
-        visibility:hidden;
+        visibility:hidden !important;
     }
 
     #printArea,
     #printArea *{
-        visibility:visible;
+        visibility:visible !important;
     }
 
     #printArea{
@@ -334,79 +471,127 @@ input,select{
         width:100%;
     }
 
-    .a4wrap{
+    .a4-container{
         padding:0;
         background:white;
     }
 
     .a4{
-        box-shadow:none;
         width:210mm;
-        min-height:297mm;
+        height:297mm;
         padding:10mm;
+        box-shadow:none;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<header>
 
-<div>
-<h1>MD Kaif Print Studio</h1>
-<small>Professional Photo & ID Printing System</small>
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo">
+MD Kaif <span>Print Studio</span>
 </div>
 
-<div>
-Designed by <b>MDKF</b>
+<div class="designed">
+Designed by MDKF
 </div>
 
 </header>
 
 
+
 <div class="container">
 
-<!-- TABS -->
 
-<div class="tabs">
+<!-- MODULE SELECT -->
 
-<button class="tab active" onclick="openTab('photo',this)">
-📸 Photo Studio
+<div class="module-tabs">
+
+<button
+class="module active"
+id="photoModuleButton"
+onclick="showModule('photo')"
+>
+
+<div class="module-title">
+📸 Photo Print
+</div>
+
+<div class="module-sub">
+Passport • Album • Custom Size
+</div>
+
 </button>
 
-<button class="tab" onclick="openTab('id',this)">
-🪪 ID Card
+
+<button
+class="module"
+id="idModuleButton"
+onclick="showModule('id')"
+>
+
+<div class="module-title">
+🪪 ID Card Print
+</div>
+
+<div class="module-sub">
+PDF • JPG • Front / Back
+</div>
+
 </button>
 
 </div>
 
 
+
 <!-- ================================================= -->
-<!-- PHOTO STUDIO -->
+<!-- PHOTO MODULE -->
 <!-- ================================================= -->
 
-<section id="photo">
+<section id="photoModule">
+
+
+<!-- UPLOAD -->
 
 <div class="card">
 
-<h2>1. Upload Photo</h2>
+<div class="step">
+<span class="step-number">1</span>
+Upload Photo
+</div>
 
-<label class="upload" for="photoInput">
 
-<strong>📁 Upload Photo</strong>
+<label
+class="upload"
+for="photoInput"
+>
 
-<br><br>
+<div>
 
+<div class="upload-title">
+📁 Select Photo
+</div>
+
+<div class="upload-info">
 JPG • JPEG • PNG • WebP
+</div>
 
-<br>
+<div class="upload-info">
+Original source quality will be preserved
+</div>
 
-<small>
-Original high-resolution photo will be preserved for final print
-</small>
+</div>
 
 </label>
+
 
 <input
 type="file"
@@ -414,139 +599,247 @@ id="photoInput"
 accept=".jpg,.jpeg,.png,.webp"
 >
 
-<div id="photoStatus" class="status">
+
+<div
+id="photoStatus"
+class="info"
+style="margin-top:10px"
+>
 No photo selected
 </div>
 
 </div>
 
 
-<!-- PHOTO EDITOR -->
 
-<div id="photoEditor" class="card hidden">
+<!-- EDITOR -->
 
-<h2>2. Photo Editing</h2>
+<div
+class="card hidden"
+id="photoEditor"
+>
 
-<div class="toolbar">
-
-<button class="gray" onclick="undoPhoto()">
-↶ Undo
-</button>
-
-<button class="gray" onclick="redoPhoto()">
-↷ Redo
-</button>
-
-<button class="gray" onclick="rotatePhoto()">
-🔄 Rotate
-</button>
-
-<button class="gray" onclick="resetPhoto()">
-Reset
-</button>
-
-<button class="primary" onclick="squareCrop()">
-✂ 1:1 Crop
-</button>
-
+<div class="step">
+<span class="step-number">2</span>
+Edit Photo
 </div>
 
 
-<div class="editor">
+<div class="editor-grid">
+
+
+<!-- PREVIEW -->
+
+<div>
+
+<div class="preview">
 
 <canvas id="photoCanvas"></canvas>
 
 </div>
 
 
-<div class="grid">
+<div class="buttons">
 
-<!-- FINISH -->
+<button
+class="btn"
+onclick="undoPhoto()"
+>
+↶ Undo
+</button>
 
-<div>
+<button
+class="btn"
+onclick="redoPhoto()"
+>
+↷ Redo
+</button>
 
-<h3>✨ Finish</h3>
+<button
+class="btn"
+onclick="rotatePhoto()"
+>
+⟳ Rotate
+</button>
 
-<div class="options">
+<button
+class="btn"
+onclick="cropSquare()"
+>
+✂ 1:1 Crop
+</button>
 
-<div class="choice active finish"
-data-value="natural">
-Natural Finish
+<button
+class="btn"
+onclick="resetPhoto()"
+>
+Reset
+</button>
+
 </div>
 
-<div class="choice finish"
-data-value="crystal">
+</div>
+
+
+
+<!-- SETTINGS -->
+
+<div class="panel">
+
+
+<div class="panel-title">
+✨ Photo Finish
+</div>
+
+
+<div
+class="chips"
+id="finishOptions"
+>
+
+<button class="chip active" data-value="natural">
+Natural
+</button>
+
+<button class="chip" data-value="crystal">
 Crystal Clear
-</div>
+</button>
 
-<div class="choice finish"
-data-value="studio">
+<button class="chip" data-value="studio">
 Studio Style
-</div>
+</button>
 
-<div class="choice finish"
-data-value="shine">
+<button class="chip" data-value="shine">
 Shine
-</div>
+</button>
 
-<div class="choice finish"
-data-value="lab">
+<button class="chip" data-value="lab">
 Lab Type Shine
-</div>
+</button>
 
-<div class="choice finish"
-data-value="smooth">
+<button class="chip" data-value="smooth">
 Smooth Finish
-</div>
+</button>
 
-<div class="choice finish"
-data-value="hd">
+<button class="chip" data-value="hd">
 HD Enhance
-</div>
+</button>
 
-<div class="choice finish"
-data-value="custom">
+<button class="chip" data-value="custom">
 Custom
+</button>
+
+</div>
+
+
+
+<div class="panel-section">
+
+<div class="panel-title">
+🎨 Background
+</div>
+
+
+<div
+class="chips"
+id="backgroundOptions"
+>
+
+<button class="chip active" data-value="original">
+Original
+</button>
+
+<button class="chip" data-value="white">
+White
+</button>
+
+<button class="chip" data-value="blue">
+Light Blue
+</button>
+
+<button class="chip" data-value="gray">
+Grey
+</button>
+
+<button class="chip" data-value="custom">
+Custom
+</button>
+
+</div>
+
+
+<div
+class="row"
+style="margin-top:10px"
+>
+
+<label>
+Color
+</label>
+
+<input
+type="color"
+id="backgroundColor"
+value="#ffffff"
+>
+
+</div>
+
+
+<div class="info">
+AI background removal can be connected in production.
 </div>
 
 </div>
 
 
-<div class="slider">
+
+<div class="panel-section">
+
+<div class="panel-title">
+⚙ Custom Setting
+</div>
+
+
+<div class="range">
 
 <span>Brightness</span>
 
 <input
 type="range"
 id="brightness"
-min="-50"
-max="50"
+min="-40"
+max="40"
 value="0"
 >
 
-<span id="brightnessValue">0</span>
+<b id="brightnessValue">
+0
+</b>
 
 </div>
 
 
-<div class="slider">
+<div class="range">
 
 <span>Contrast</span>
 
 <input
 type="range"
 id="contrast"
-min="-50"
-max="50"
+min="-40"
+max="40"
 value="0"
 >
 
-<span id="contrastValue">0</span>
+<b id="contrastValue">
+0
+</b>
 
 </div>
 
 
-<div class="slider">
+<div class="range">
 
 <span>Sharpness</span>
 
@@ -558,12 +851,14 @@ max="100"
 value="20"
 >
 
-<span id="sharpnessValue">20</span>
+<b id="sharpnessValue">
+20
+</b>
 
 </div>
 
 
-<div class="slider">
+<div class="range">
 
 <span>Smoothness</span>
 
@@ -575,133 +870,109 @@ max="100"
 value="0"
 >
 
-<span id="smoothnessValue">0</span>
+<b id="smoothnessValue">
+0
+</b>
 
 </div>
 
 </div>
 
 
-<!-- BACKGROUND -->
 
-<div>
+<div class="quality">
 
-<h3>🎨 Background</h3>
+🔒
+<b>Quality Protection</b>
 
-<div class="options">
+<br>
 
-<div class="choice active bg"
-data-value="original">
-Original
-</div>
-
-<div class="choice bg"
-data-value="white">
-White
-</div>
-
-<div class="choice bg"
-data-value="blue">
-Light Blue
-</div>
-
-<div class="choice bg"
-data-value="gray">
-Grey
-</div>
-
-<div class="choice bg"
-data-value="custom">
-Custom
-</div>
+Uploaded original is kept as the source.
+Preview scaling does not intentionally replace the original file.
 
 </div>
 
-
-<div class="row">
-
-<label>Custom Color</label>
-
-<input
-type="color"
-id="backgroundColor"
-value="#ffffff"
->
-
-</div>
-
-<small>
-Background replacement option is included. AI-level automatic
-hair/person segmentation can be connected in the production version.
-</small>
 
 </div>
 
 </div>
 
 </div>
+
 
 
 <!-- SIZE -->
 
 <div class="card">
 
-<h2>3. Photo Size & Quantity</h2>
+<div class="step">
+<span class="step-number">3</span>
+Size & Quantity
+</div>
 
-
-<div class="options">
 
 <div
-class="choice size active"
+class="chips"
+id="sizeOptions"
+>
+
+<button
+class="chip active"
 data-w="35"
 data-h="45"
 >
 Passport 35×45 mm
-</div>
+</button>
 
 
-<div
-class="choice size"
+<button
+class="chip"
 data-w="25"
 data-h="35"
 >
 Small 25×35 mm
-</div>
+</button>
 
 
-<div
-class="choice size"
+<button
+class="chip"
 data-w="50"
 data-h="50"
 >
 Album 50×50 mm
-</div>
+</button>
 
 
-<div
-class="choice size"
+<button
+class="chip"
 data-w="60"
 data-h="90"
 >
 Album 60×90 mm
-</div>
+</button>
 
 
-<div
-class="choice size"
+<button
+class="chip"
 data-w="custom"
 data-h="custom"
 >
-Custom Size
-</div>
+Custom
+</button>
 
 </div>
 
 
-<div class="row">
+
+<div
+class="row"
+style="margin-top:15px"
+>
+
+<div class="field">
 
 <label>
-Width
+Width (mm)
 </label>
 
 <input
@@ -711,13 +982,13 @@ value="35"
 min="5"
 >
 
-<label>
-mm
-</label>
+</div>
 
 
+<div class="field">
+
 <label>
-Height
+Height (mm)
 </label>
 
 <input
@@ -727,10 +998,10 @@ value="45"
 min="5"
 >
 
-<label>
-mm
-</label>
+</div>
 
+
+<div class="field">
 
 <label>
 Quantity
@@ -744,22 +1015,25 @@ min="1"
 max="200"
 >
 
+</div>
+
+
 <button
-class="green"
+class="btn btn-green"
 onclick="generatePhotoA4()"
 >
-Generate A4
+✓ Auto Fit A4
 </button>
 
 </div>
 
 
-<div class="status">
-
-Example:
-Passport Size → Quantity 30 → Generate A4.
-System automatically calculates the A4 layout.
-
+<div
+id="photoFitInfo"
+class="info"
+style="margin-top:10px"
+>
+Passport 35×45 mm selected.
 </div>
 
 </div>
@@ -769,29 +1043,43 @@ System automatically calculates the A4 layout.
 
 
 <!-- ================================================= -->
-<!-- ID CARD -->
+<!-- ID MODULE -->
 <!-- ================================================= -->
 
-<section id="id" class="hidden">
+<section
+id="idModule"
+class="hidden"
+>
+
 
 <div class="card">
 
-<h2>🪪 ID Card Upload</h2>
+<div class="step">
+<span class="step-number">1</span>
+Upload ID File
+</div>
 
 
-<label class="upload" for="idInput">
+<label
+class="upload"
+for="idInput"
+>
 
-<strong>📁 Upload ID</strong>
+<div>
 
-<br><br>
+<div class="upload-title">
+📁 Select ID File
+</div>
 
+<div class="upload-info">
 PDF • JPG • JPEG • PNG • WebP
+</div>
 
-<br>
-
-<small>
+<div class="upload-info">
 One file can contain Front + Back
-</small>
+</div>
+
+</div>
 
 </label>
 
@@ -803,61 +1091,72 @@ accept=".pdf,.jpg,.jpeg,.png,.webp"
 >
 
 
-<div class="options">
-
 <div
-class="choice active idMode"
+class="chips"
+style="margin-top:15px"
+>
+
+<button
+class="chip active id-mode"
 data-mode="front"
 >
 Front Only
-</div>
+</button>
 
-<div
-class="choice idMode"
+
+<button
+class="chip id-mode"
 data-mode="back"
 >
 Back Only
-</div>
+</button>
 
-<div
-class="choice idMode"
+
+<button
+class="chip id-mode"
 data-mode="both"
 >
-Front + Back
-</div>
+Front + Back — One File
+</button>
 
 </div>
 
 
-<div id="idStatus" class="status">
+<div
+id="idStatus"
+class="info"
+style="margin-top:10px"
+>
 No file selected
 </div>
 
 </div>
 
 
-<div id="idCropCard" class="card hidden">
 
-<h2>2. Crop ID Printing Area</h2>
+<!-- ID EDITOR -->
 
-
-<div class="toolbar">
-
-<button class="gray" onclick="resetIdCrop()">
-Reset
-</button>
-
-<button
-class="green"
-onclick="applyIdCrop()"
+<div
+class="card hidden"
+id="idEditor"
 >
-✓ Apply Crop
-</button>
+
+<div class="step">
+
+<span class="step-number">2</span>
+
+Select Only Printing Area
 
 </div>
 
 
-<div class="editor">
+<div class="id-grid">
+
+
+<div>
+
+
+<div class="crop-stage">
 
 <div
 class="crop-wrapper"
@@ -867,38 +1166,69 @@ id="cropWrapper"
 <canvas id="idCanvas"></canvas>
 
 <div
-id="selection"
-class="selection"
-></div>
-
+class="crop-box"
+id="cropBox"
+>
 </div>
-
-</div>
-
-
-<div class="status">
-
-Mouse se drag karke sirf ID card ka required portion select karein.
 
 </div>
 
 </div>
 
 
-<div id="idPreviewCard" class="card hidden">
+<div class="buttons">
 
-<h2>3. ID Preview</h2>
+<button
+class="btn"
+onclick="clearCrop()"
+>
+Clear Selection
+</button>
+
+
+<button
+class="btn btn-green"
+onclick="applyCrop()"
+>
+✓ Apply Crop
+</button>
+
+</div>
+
+
+<div
+class="info"
+style="margin-top:8px"
+>
+Mouse/touch se drag karke jitna part print karna hai utna select karein.
+</div>
+
+</div>
+
+
+
+<div class="panel">
+
+
+<div class="panel-title">
+Front / Back Preview
+</div>
+
 
 <div
 id="idPreview"
-class="preview"
-></div>
+class="id-preview"
+>
+</div>
 
 
-<div class="row">
+<div class="panel-section">
+
+
+<div class="field">
 
 <label>
-Quantity
+Copies
 </label>
 
 <input
@@ -908,12 +1238,21 @@ value="6"
 min="1"
 >
 
+</div>
+
+
 <button
-class="green"
-onclick="generateIdA4()"
+class="btn btn-green"
+style="width:100%;margin-top:12px"
+onclick="generateIDA4()"
 >
-Generate A4
+✓ Generate A4
 </button>
+
+
+</div>
+
+</div>
 
 </div>
 
@@ -924,41 +1263,51 @@ Generate A4
 
 
 <!-- ================================================= -->
-<!-- A4 PRINT -->
+<!-- PRINT PREVIEW -->
 <!-- ================================================= -->
 
 <div
-id="printArea"
 class="card hidden"
+id="printArea"
 >
 
-<h2>
+<div class="step">
 🖨 A4 Print Preview
-</h2>
+</div>
 
 
-<div class="a4wrap">
+<div class="a4-container">
 
 <div
-id="a4"
 class="a4"
-></div>
+id="a4Sheet"
+>
+</div>
 
 </div>
 
 
-<div class="row">
+<div class="buttons">
 
 <button
-class="dark"
+class="btn btn-dark"
 onclick="window.print()"
 >
-🖨 Print
+🖨 Print A4
+</button>
+
+
+<button
+class="btn"
+onclick="clearPrint()"
+>
+Clear
 </button>
 
 </div>
 
 </div>
+
 
 </div>
 
@@ -966,128 +1315,171 @@ onclick="window.print()"
 
 <script>
 
-/* ============================================
-   TAB SYSTEM
-============================================ */
 
-function openTab(tab,button){
+/* ==================================================
+   MODULE SWITCH
+================================================== */
 
-document.getElementById("photo")
-.classList.toggle("hidden",tab!=="photo");
+function showModule(module){
 
-document.getElementById("id")
-.classList.toggle("hidden",tab!=="id");
+const photo =
+document.getElementById("photoModule");
 
-document.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
+const id =
+document.getElementById("idModule");
 
-button.classList.add("active");
+const photoButton =
+document.getElementById("photoModuleButton");
+
+const idButton =
+document.getElementById("idModuleButton");
+
+
+if(module === "photo"){
+
+photo.classList.remove("hidden");
+
+id.classList.add("hidden");
+
+photoButton.classList.add("active");
+
+idButton.classList.remove("active");
+
+}else{
+
+photo.classList.add("hidden");
+
+id.classList.remove("hidden");
+
+photoButton.classList.remove("active");
+
+idButton.classList.add("active");
+
+}
 
 }
 
 
 
-/* ============================================
-   PHOTO SYSTEM
-============================================ */
+/* ==================================================
+   PHOTO
+================================================== */
 
-let photoImage=null;
+let photoImage = null;
 
-let photoRotation=0;
+let photoRotation = 0;
 
-let photoHistory=[];
+let photoFinish = "natural";
 
-let photoRedo=[];
+let photoBackground = "original";
 
-let finish="natural";
+let photoHistory = [];
 
-let background="original";
+let photoRedo = [];
 
-const photoCanvas=
+
+const photoCanvas =
 document.getElementById("photoCanvas");
 
-const photoCtx=
+const photoCtx =
 photoCanvas.getContext("2d");
 
 
-document.getElementById("photoInput")
-.addEventListener("change",function(){
 
-const file=this.files[0];
+document
+.getElementById("photoInput")
+.addEventListener(
+"change",
+function(){
 
-if(!file)return;
+const file = this.files[0];
 
-const url=
+if(!file) return;
+
+
+const url =
 URL.createObjectURL(file);
 
-const img=
+const image =
 new Image();
 
-img.onload=function(){
 
-photoImage=img;
+image.onload = function(){
 
-photoRotation=0;
+photoImage = image;
 
-photoHistory=[];
+photoRotation = 0;
 
-photoRedo=[];
+photoHistory = [];
+
+photoRedo = [];
 
 drawPhoto();
+
 
 document
 .getElementById("photoEditor")
 .classList.remove("hidden");
 
+
 document
 .getElementById("photoStatus")
-.innerText=
-file.name+
-" • "+
-img.naturalWidth+
-" × "+
-img.naturalHeight+
-" px";
+.textContent =
+file.name +
+" • " +
+image.naturalWidth +
+" × " +
+image.naturalHeight +
+" px • Original source retained";
+
 
 URL.revokeObjectURL(url);
 
 };
 
-img.src=url;
+
+image.src = url;
 
 });
 
 
 
-function filterValue(){
+function getPhotoFilter(){
 
-let b=
-Number(document.getElementById("brightness").value);
+let brightness =
+Number(
+document.getElementById("brightness").value
+);
 
-let c=
-Number(document.getElementById("contrast").value);
+let contrast =
+Number(
+document.getElementById("contrast").value
+);
 
-let s=
-Number(document.getElementById("sharpness").value);
+
+let saturation = 100;
 
 
-let sat=100;
+if(photoFinish === "crystal")
+saturation = 112;
 
-if(finish==="crystal")sat=112;
+if(photoFinish === "studio")
+saturation = 108;
 
-if(finish==="studio")sat=108;
+if(photoFinish === "shine")
+saturation = 112;
 
-if(finish==="shine")sat=112;
+if(photoFinish === "lab")
+saturation = 116;
 
-if(finish==="lab")sat=118;
-
-if(finish==="hd")sat=120;
+if(photoFinish === "hd")
+saturation = 120;
 
 
 return `
-brightness(${100+b}%)
-contrast(${100+c}%)
-saturate(${sat}%)
+brightness(${100 + brightness}%)
+contrast(${100 + contrast}%)
+saturate(${saturation}%)
 `;
 
 }
@@ -1096,39 +1488,45 @@ saturate(${sat}%)
 
 function drawPhoto(){
 
-if(!photoImage)return;
+if(!photoImage)
+return;
 
 
-const max=1800;
+const MAX =
+1800;
 
-let scale=
+
+let scale =
 Math.min(
 1,
-max/photoImage.naturalWidth,
-max/photoImage.naturalHeight
+MAX / photoImage.naturalWidth,
+MAX / photoImage.naturalHeight
 );
 
 
-let w=
-Math.round(photoImage.naturalWidth*scale);
+let w =
+Math.round(
+photoImage.naturalWidth * scale
+);
 
-let h=
-Math.round(photoImage.naturalHeight*scale);
+
+let h =
+Math.round(
+photoImage.naturalHeight * scale
+);
 
 
-if(photoRotation%180!==0){
+if(photoRotation % 180 !== 0){
 
-[w,h]=[h,w];
+[w,h] = [h,w];
 
 }
 
 
-photoCanvas.width=w;
+photoCanvas.width = w;
 
-photoCanvas.height=h;
+photoCanvas.height = h;
 
-
-photoCtx.save();
 
 photoCtx.clearRect(
 0,
@@ -1138,6 +1536,9 @@ h
 );
 
 
+photoCtx.save();
+
+
 photoCtx.translate(
 w/2,
 h/2
@@ -1145,19 +1546,19 @@ h/2
 
 
 photoCtx.rotate(
-photoRotation*Math.PI/180
+photoRotation * Math.PI / 180
 );
 
 
-photoCtx.filter=
-filterValue();
+photoCtx.filter =
+getPhotoFilter();
 
 
-let iw=
-photoImage.naturalWidth*scale;
+let iw =
+photoImage.naturalWidth * scale;
 
-let ih=
-photoImage.naturalHeight*scale;
+let ih =
+photoImage.naturalHeight * scale;
 
 
 photoCtx.drawImage(
@@ -1172,39 +1573,36 @@ ih
 photoCtx.restore();
 
 
-applyBackground();
+if(photoBackground !== "original"){
+
+photoCtx.save();
+
+photoCtx.globalCompositeOperation =
+"destination-over";
+
+
+let color = "#ffffff";
+
+
+if(photoBackground === "blue")
+color = "#e6f4ff";
+
+
+if(photoBackground === "gray")
+color = "#e5e7eb";
+
+
+if(photoBackground === "custom"){
+
+color =
+document
+.getElementById("backgroundColor")
+.value;
 
 }
 
 
-
-function applyBackground(){
-
-if(background==="original")
-return;
-
-
-photoCtx.save();
-
-photoCtx.globalCompositeOperation=
-"destination-over";
-
-
-let color="#ffffff";
-
-
-if(background==="blue")
-color="#dff2ff";
-
-if(background==="gray")
-color="#e5e7eb";
-
-if(background==="custom")
-color=
-document.getElementById("backgroundColor").value;
-
-
-photoCtx.fillStyle=color;
+photoCtx.fillStyle = color;
 
 photoCtx.fillRect(
 0,
@@ -1213,28 +1611,35 @@ photoCanvas.width,
 photoCanvas.height
 );
 
+
 photoCtx.restore();
+
+}
 
 }
 
 
 
-/* FINISH */
-
-document.querySelectorAll(".finish")
-.forEach(x=>{
-
-x.onclick=()=>{
+/* ==================================================
+   PHOTO SETTINGS
+================================================== */
 
 document
-.querySelectorAll(".finish")
-.forEach(a=>
-a.classList.remove("active")
+.querySelectorAll("#finishOptions .chip")
+.forEach(button => {
+
+button.onclick = function(){
+
+document
+.querySelectorAll("#finishOptions .chip")
+.forEach(x =>
+x.classList.remove("active")
 );
 
-x.classList.add("active");
+button.classList.add("active");
 
-finish=x.dataset.value;
+photoFinish =
+button.dataset.value;
 
 drawPhoto();
 
@@ -1244,22 +1649,22 @@ drawPhoto();
 
 
 
-/* BACKGROUND */
+document
+.querySelectorAll("#backgroundOptions .chip")
+.forEach(button => {
 
-document.querySelectorAll(".bg")
-.forEach(x=>{
-
-x.onclick=()=>{
+button.onclick = function(){
 
 document
-.querySelectorAll(".bg")
-.forEach(a=>
-a.classList.remove("active")
+.querySelectorAll("#backgroundOptions .chip")
+.forEach(x =>
+x.classList.remove("active")
 );
 
-x.classList.add("active");
+button.classList.add("active");
 
-background=x.dataset.value;
+photoBackground =
+button.dataset.value;
 
 drawPhoto();
 
@@ -1268,14 +1673,17 @@ drawPhoto();
 });
 
 
-document.getElementById("backgroundColor")
-.oninput=drawPhoto;
+
+document
+.getElementById("backgroundColor")
+.addEventListener(
+"input",
+drawPhoto
+);
 
 
 
-/* SLIDERS */
-
-const sliders=[
+const rangePairs = [
 ["brightness","brightnessValue"],
 ["contrast","contrastValue"],
 ["sharpness","sharpnessValue"],
@@ -1283,36 +1691,77 @@ const sliders=[
 ];
 
 
-sliders.forEach(item=>{
+rangePairs.forEach(pair => {
 
-document.getElementById(item[0])
-.addEventListener("input",function(){
+document
+.getElementById(pair[0])
+.addEventListener(
+"input",
+function(){
 
-document.getElementById(item[1])
-.innerText=this.value;
+document
+.getElementById(pair[1])
+.textContent =
+this.value;
 
 drawPhoto();
 
-});
+}
+);
 
 });
 
 
 
-/* SAVE HISTORY */
+/* ==================================================
+   UNDO REDO
+================================================== */
 
-function savePhotoState(){
+function savePhotoHistory(){
 
-if(!photoCanvas.width)return;
+if(!photoCanvas.width)
+return;
+
 
 photoHistory.push(
 photoCanvas.toDataURL("image/png")
 );
 
-if(photoHistory.length>20)
+
+if(photoHistory.length > 20)
 photoHistory.shift();
 
-photoRedo=[];
+
+photoRedo = [];
+
+}
+
+
+
+function restorePhoto(data){
+
+const image =
+new Image();
+
+
+image.onload = function(){
+
+photoCanvas.width =
+image.width;
+
+photoCanvas.height =
+image.height;
+
+photoCtx.drawImage(
+image,
+0,
+0
+);
+
+};
+
+
+image.src = data;
 
 }
 
@@ -1323,14 +1772,15 @@ function undoPhoto(){
 if(!photoHistory.length)
 return;
 
+
 photoRedo.push(
 photoCanvas.toDataURL()
 );
 
-const data=
-photoHistory.pop();
 
-restoreCanvas(data);
+restorePhoto(
+photoHistory.pop()
+);
 
 }
 
@@ -1341,52 +1791,30 @@ function redoPhoto(){
 if(!photoRedo.length)
 return;
 
+
 photoHistory.push(
 photoCanvas.toDataURL()
 );
 
-const data=
-photoRedo.pop();
 
-restoreCanvas(data);
-
-}
-
-
-
-function restoreCanvas(data){
-
-const img=
-new Image();
-
-img.onload=function(){
-
-photoCanvas.width=
-img.width;
-
-photoCanvas.height=
-img.height;
-
-photoCtx.drawImage(
-img,
-0,
-0
+restorePhoto(
+photoRedo.pop()
 );
 
-};
-
-img.src=data;
-
 }
 
 
+
+/* ==================================================
+   ROTATE / RESET
+================================================== */
 
 function rotatePhoto(){
 
-savePhotoState();
+savePhotoHistory();
 
-photoRotation=
-(photoRotation+90)%360;
+photoRotation =
+(photoRotation + 90) % 360;
 
 drawPhoto();
 
@@ -1396,19 +1824,29 @@ drawPhoto();
 
 function resetPhoto(){
 
-photoRotation=0;
+photoRotation = 0;
 
-document.getElementById("brightness").value=0;
+photoFinish = "natural";
 
-document.getElementById("contrast").value=0;
+photoBackground = "original";
 
-document.getElementById("sharpness").value=20;
 
-document.getElementById("smoothness").value=0;
+document
+.getElementById("brightness")
+.value = 0;
 
-background="original";
+document
+.getElementById("contrast")
+.value = 0;
 
-finish="natural";
+document
+.getElementById("sharpness")
+.value = 20;
+
+document
+.getElementById("smoothness")
+.value = 0;
+
 
 drawPhoto();
 
@@ -1416,94 +1854,110 @@ drawPhoto();
 
 
 
-function squareCrop(){
+/* ==================================================
+   SQUARE CROP
+================================================== */
 
-if(!photoCanvas.width)return;
+function cropSquare(){
 
-savePhotoState();
+if(!photoCanvas.width)
+return;
 
 
-let n=
+savePhotoHistory();
+
+
+const size =
 Math.min(
 photoCanvas.width,
 photoCanvas.height
 );
 
 
-let x=
-(photoCanvas.width-n)/2;
+const x =
+(photoCanvas.width - size) / 2;
 
-let y=
-(photoCanvas.height-n)/2;
+const y =
+(photoCanvas.height - size) / 2;
 
 
-let temp=
+const temp =
 document.createElement("canvas");
 
-temp.width=n;
 
-temp.height=n;
+temp.width = size;
+
+temp.height = size;
 
 
-temp.getContext("2d")
+temp
+.getContext("2d")
 .drawImage(
 photoCanvas,
 x,
 y,
-n,
-n,
+size,
+size,
 0,
 0,
-n,
-n
+size,
+size
 );
 
 
-const img=
+const newImage =
 new Image();
 
-img.onload=function(){
 
-photoImage=img;
+newImage.onload = function(){
 
-photoRotation=0;
+photoImage = newImage;
+
+photoRotation = 0;
 
 drawPhoto();
 
 };
 
-img.src=
+
+newImage.src =
 temp.toDataURL("image/png");
 
 }
 
 
 
-/* ============================================
+/* ==================================================
    PHOTO SIZE
-============================================ */
-
-document.querySelectorAll(".size")
-.forEach(x=>{
-
-x.onclick=()=>{
+================================================== */
 
 document
-.querySelectorAll(".size")
-.forEach(a=>
-a.classList.remove("active")
+.querySelectorAll("#sizeOptions .chip")
+.forEach(button => {
+
+button.onclick = function(){
+
+document
+.querySelectorAll("#sizeOptions .chip")
+.forEach(x =>
+x.classList.remove("active")
 );
 
-x.classList.add("active");
+button.classList.add("active");
 
 
-if(x.dataset.w!=="custom"){
+if(button.dataset.w !== "custom"){
 
-document.getElementById("photoWidth")
-.value=x.dataset.w;
+document
+.getElementById("photoWidth")
+.value =
+button.dataset.w;
 
-document.getElementById("photoHeight")
-.value=x.dataset.h;
+
+document
+.getElementById("photoHeight")
+.value =
+button.dataset.h;
 
 }
 
@@ -1515,9 +1969,7 @@ document.getElementById("photoHeight")
 
 function mmToPx(mm){
 
-return Math.round(
-mm*3.779527559
-);
+return mm * 3.779527559;
 
 }
 
@@ -1527,113 +1979,146 @@ function generatePhotoA4(){
 
 if(!photoCanvas.width){
 
-alert("Please upload a photo first.");
+alert(
+"Please upload a photo first."
+);
 
 return;
 
 }
 
 
-let width=
+const width =
 Number(
 document.getElementById("photoWidth").value
 );
 
-let height=
+
+const height =
 Number(
 document.getElementById("photoHeight").value
 );
 
-let quantity=
+
+const quantity =
 Number(
 document.getElementById("photoQuantity").value
 );
 
 
-if(width<=0||height<=0||quantity<=0)
+if(width <= 0 ||
+height <= 0 ||
+quantity <= 0){
+
+alert(
+"Please enter valid size and quantity."
+);
+
 return;
 
-
-const a4=
-document.getElementById("a4");
-
-a4.innerHTML="";
+}
 
 
-const A4W=794;
+const A4_WIDTH = 794;
 
-const A4H=1123;
+const A4_HEIGHT = 1123;
 
-const padding=35;
+const PADDING = 32;
 
-const gap=12;
+const GAP = 9;
 
 
-const pw=
+const photoWidth =
 mmToPx(width);
 
-const ph=
+const photoHeight =
 mmToPx(height);
 
 
-let cols=
+const columns =
+Math.max(
+1,
 Math.floor(
-(A4W-2*padding+gap)/
-(pw+gap)
+(A4_WIDTH - 2 * PADDING + GAP) /
+(photoWidth + GAP)
+)
 );
 
 
-let rows=
+const rows =
+Math.max(
+1,
 Math.floor(
-(A4H-2*padding+gap)/
-(ph+gap)
+(A4_HEIGHT - 2 * PADDING + GAP) /
+(photoHeight + GAP)
+)
 );
 
 
-if(cols<1)cols=1;
-
-if(rows<1)rows=1;
-
-
-let max=
-cols*rows;
+const maximum =
+columns * rows;
 
 
-const finalImage=
+document
+.getElementById("photoFitInfo")
+.textContent =
+`${width} × ${height} mm • ${columns} columns × ${rows} rows • ${maximum} photos maximum on one A4`;
+
+
+const sheet =
+document.getElementById("a4Sheet");
+
+
+sheet.innerHTML = "";
+
+
+const finalImage =
 photoCanvas.toDataURL(
 "image/jpeg",
-1.0
+1
+);
+
+
+const count =
+Math.min(
+quantity,
+maximum
 );
 
 
 for(
-let i=0;
-i<Math.min(quantity,max);
+let i = 0;
+i < count;
 i++
 ){
 
-const div=
+const item =
 document.createElement("div");
 
-div.className=
-"print-photo";
 
-div.style.width=
-pw+"px";
-
-div.style.height=
-ph+"px";
+item.className =
+"print-item";
 
 
-const img=
+item.style.width =
+photoWidth + "px";
+
+
+item.style.height =
+photoHeight + "px";
+
+
+const image =
 document.createElement("img");
 
-img.src=finalImage;
+
+image.src =
+finalImage;
 
 
-div.appendChild(img);
+item.appendChild(image);
 
-a4.appendChild(div);
+sheet.appendChild(item);
 
 }
 
@@ -1650,12 +2135,10 @@ behavior:"smooth"
 });
 
 
-if(quantity>max){
+if(quantity > maximum){
 
 alert(
-"Selected size ke according ek A4 par "+
-max+
-" photos fit ho rahe hain. Baaki next sheet mein jayenge."
+`One A4 par maximum ${maximum} photos fit ho rahe hain.`
 );
 
 }
@@ -1664,33 +2147,54 @@ max+
 
 
 
-/* ============================================
+/* ==================================================
    ID CARD
-============================================ */
+================================================== */
 
-let idMode="front";
+let idMode = "front";
 
-let idFront=null;
+let idFront = null;
 
-let idBack=null;
+let idBack = null;
 
-let idFile=null;
+let cropSelecting = false;
+
+let cropStartX = 0;
+
+let cropStartY = 0;
 
 
-document.querySelectorAll(".idMode")
-.forEach(x=>{
+const idCanvas =
+document.getElementById("idCanvas");
 
-x.onclick=()=>{
+const idCtx =
+idCanvas.getContext("2d");
+
+
+const cropWrapper =
+document.getElementById("cropWrapper");
+
+const cropBox =
+document.getElementById("cropBox");
+
+
 
 document
-.querySelectorAll(".idMode")
-.forEach(a=>
-a.classList.remove("active")
+.querySelectorAll(".id-mode")
+.forEach(button => {
+
+button.onclick = function(){
+
+document
+.querySelectorAll(".id-mode")
+.forEach(x =>
+x.classList.remove("active")
 );
 
-x.classList.add("active");
+button.classList.add("active");
 
-idMode=x.dataset.mode;
+idMode =
+button.dataset.mode;
 
 };
 
@@ -1698,31 +2202,38 @@ idMode=x.dataset.mode;
 
 
 
-document.getElementById("idInput")
-.addEventListener("change",function(){
-
-idFile=this.files[0];
-
-if(!idFile)return;
-
-
 document
-.getElementById("idCropCard")
-.classList.remove("hidden");
+.getElementById("idInput")
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+if(!file)
+return;
 
 
 document
 .getElementById("idStatus")
-.innerText=
-idFile.name;
+.textContent =
+file.name +
+" • " +
+(file.type || "file");
+
+
+document
+.getElementById("idEditor")
+.classList.remove("hidden");
 
 
 if(
-idFile.type==="application/pdf"
+file.type === "application/pdf"
 ){
 
 alert(
-"PDF upload detected. Image crop is active in this standalone version. Production version mein PDF.js se multi-page Front/Back automatic processing add kiya ja sakta hai."
+"PDF selected. Production version mein PDF.js se pages ko read karke Front + Back automatic process kiya ja sakta hai. Image files ke liye crop abhi active hai."
 );
 
 return;
@@ -1730,83 +2241,66 @@ return;
 }
 
 
-const url=
-URL.createObjectURL(idFile);
+const url =
+URL.createObjectURL(file);
 
-const img=
+
+const image =
 new Image();
 
-img.onload=function(){
 
-const c=
-document.getElementById("idCanvas");
+image.onload = function(){
 
-const ctx=
-c.getContext("2d");
+idCanvas.width =
+image.naturalWidth;
 
-
-c.width=
-img.naturalWidth;
-
-c.height=
-img.naturalHeight;
+idCanvas.height =
+image.naturalHeight;
 
 
-ctx.drawImage(
-img,
+idCtx.drawImage(
+image,
 0,
 0
 );
 
 
-URL.revokeObjectURL(url);
+clearCrop();
 
-resetIdCrop();
+
+URL.revokeObjectURL(url);
 
 };
 
-img.src=url;
+
+image.src = url;
 
 });
 
 
 
-/* ID CROP */
+/* ==================================================
+   ID CROP
+================================================== */
 
-let selecting=false;
+function getCropPoint(event){
 
-let startX=0;
-
-let startY=0;
-
-
-const idCanvas=
-document.getElementById("idCanvas");
-
-const idWrapper=
-document.getElementById("cropWrapper");
-
-const selection=
-document.getElementById("selection");
-
-
-function pointerPosition(e){
-
-const rect=
+const rect =
 idCanvas.getBoundingClientRect();
 
-return{
+
+return {
 
 x:
-(e.clientX-rect.left)
+(event.clientX - rect.left)
 *
-idCanvas.width/
+idCanvas.width /
 rect.width,
 
 y:
-(e.clientY-rect.top)
+(event.clientY - rect.top)
 *
-idCanvas.height/
+idCanvas.height /
 rect.height
 
 };
@@ -1815,158 +2309,206 @@ rect.height
 
 
 
-idWrapper.addEventListener(
+cropWrapper.addEventListener(
 "pointerdown",
-function(e){
+function(event){
 
-const p=
-pointerPosition(e);
+const point =
+getCropPoint(event);
 
-startX=p.x;
 
-startY=p.y;
+cropStartX =
+point.x;
 
-selecting=true;
+cropStartY =
+point.y;
 
-selection.style.display="block";
+
+cropSelecting = true;
+
+
+cropBox.style.display =
+"block";
+
+
+cropWrapper.setPointerCapture(
+event.pointerId
+);
 
 });
 
 
 
-idWrapper.addEventListener(
+cropWrapper.addEventListener(
 "pointermove",
-function(e){
+function(event){
 
-if(!selecting)return;
-
-const p=
-pointerPosition(e);
+if(!cropSelecting)
+return;
 
 
-let x=
+const point =
+getCropPoint(event);
+
+
+const x =
 Math.min(
-startX,
-p.x
+cropStartX,
+point.x
 );
 
-let y=
+
+const y =
 Math.min(
-startY,
-p.y
+cropStartY,
+point.y
 );
 
-let w=
+
+const width =
 Math.abs(
-p.x-startX
+point.x - cropStartX
 );
 
-let h=
+
+const height =
 Math.abs(
-p.y-startY
+point.y - cropStartY
 );
 
 
-const r=
+const rect =
 idCanvas.getBoundingClientRect();
 
 
-selection.style.left=
-x*r.width/idCanvas.width+"px";
+cropBox.style.left =
+x *
+rect.width /
+idCanvas.width +
+"px";
 
-selection.style.top=
-y*r.height/idCanvas.height+"px";
 
-selection.style.width=
-w*r.width/idCanvas.width+"px";
+cropBox.style.top =
+y *
+rect.height /
+idCanvas.height +
+"px";
 
-selection.style.height=
-h*r.height/idCanvas.height+"px";
+
+cropBox.style.width =
+width *
+rect.width /
+idCanvas.width +
+"px";
+
+
+cropBox.style.height =
+height *
+rect.height /
+idCanvas.height +
+"px";
 
 });
 
 
 
-idWrapper.addEventListener(
+cropWrapper.addEventListener(
 "pointerup",
 function(){
 
-selecting=false;
+cropSelecting = false;
 
 });
 
 
 
-function resetIdCrop(){
+function clearCrop(){
 
-selection.style.display="none";
+cropBox.style.display =
+"none";
 
 }
 
 
 
-function applyIdCrop(){
+function applyCrop(){
 
-if(!idCanvas.width)return;
+if(!idCanvas.width)
+return;
 
 
-const r=
+const rect =
 idCanvas.getBoundingClientRect();
 
 
-let left=
+let left =
 parseFloat(
-selection.style.left||0
-);
-
-let top=
-parseFloat(
-selection.style.top||0
-);
-
-let width=
-parseFloat(
-selection.style.width||r.width
-);
-
-let height=
-parseFloat(
-selection.style.height||r.height
+cropBox.style.left || 0
 );
 
 
-let sx=
-left*idCanvas.width/r.width;
-
-let sy=
-top*idCanvas.height/r.height;
-
-let sw=
-width*idCanvas.width/r.width;
-
-let sh=
-height*idCanvas.height/r.height;
+let top =
+parseFloat(
+cropBox.style.top || 0
+);
 
 
-if(sw<10||sh<10){
+let width =
+parseFloat(
+cropBox.style.width || rect.width
+);
 
-sx=0;
 
-sy=0;
+let height =
+parseFloat(
+cropBox.style.height || rect.height
+);
 
-sw=idCanvas.width;
 
-sh=idCanvas.height;
+let sx =
+left *
+idCanvas.width /
+rect.width;
+
+
+let sy =
+top *
+idCanvas.height /
+rect.height;
+
+
+let sw =
+width *
+idCanvas.width /
+rect.width;
+
+
+let sh =
+height *
+idCanvas.height /
+rect.height;
+
+
+if(sw < 10 || sh < 10){
+
+sx = 0;
+
+sy = 0;
+
+sw = idCanvas.width;
+
+sh = idCanvas.height;
 
 }
 
 
-const output=
+const output =
 document.createElement("canvas");
 
-output.width=sw;
 
-output.height=sh;
+output.width = sw;
+
+output.height = sh;
 
 
 output
@@ -1984,64 +2526,71 @@ sh
 );
 
 
-const image=
+const result =
 output.toDataURL(
 "image/jpeg",
-1.0
+1
 );
 
 
-if(idMode==="front"){
+if(idMode === "front"){
 
-idFront=image;
+idFront = result;
+
+}
+
+
+else if(idMode === "back"){
+
+idBack = result;
 
 }
 
-else if(idMode==="back"){
-
-idBack=image;
-
-}
 
 else{
 
 if(!idFront){
 
-idFront=image;
+idFront = result;
 
 }else{
 
-idBack=image;
+idBack = result;
 
 }
 
 }
 
 
-updateIdPreview();
+renderIdPreview();
 
-resetIdCrop();
+clearCrop();
 
 }
 
 
 
-function updateIdPreview(){
+function renderIdPreview(){
 
-const preview=
+const preview =
 document.getElementById("idPreview");
 
-preview.innerHTML="";
+
+preview.innerHTML = "";
 
 
 if(idFront){
 
-preview.innerHTML+=`
-<div class="thumb">
+preview.innerHTML += `
+
+<div class="id-card-preview">
+
 <img src="${idFront}">
-<br>
+
 <b>FRONT</b>
+
 </div>
+
 `;
 
 }
@@ -2049,54 +2598,60 @@ preview.innerHTML+=`
 
 if(idBack){
 
-preview.innerHTML+=`
-<div class="thumb">
+preview.innerHTML += `
+
+<div class="id-card-preview">
+
 <img src="${idBack}">
-<br>
+
 <b>BACK</b>
+
 </div>
+
 `;
 
 }
 
-
-document
-.getElementById("idPreviewCard")
-.classList.remove("hidden");
-
 }
 
 
 
-function generateIdA4(){
+/* ==================================================
+   ID A4
+================================================== */
 
-let qty=
-Number(
-document.getElementById("idQuantity").value
+function generateIDA4(){
+
+if(!idFront && !idBack){
+
+alert(
+"Please crop Front / Back first."
 );
-
-
-if(!idFront&&!idBack){
-
-alert("Please crop Front/Back first.");
 
 return;
 
 }
 
 
-const a4=
-document.getElementById("a4");
+const quantity =
+Number(
+document.getElementById("idQuantity").value
+);
 
-a4.innerHTML="";
+
+const sheet =
+document.getElementById("a4Sheet");
 
 
-let images=[];
+sheet.innerHTML = "";
+
+
+const images = [];
 
 
 for(
-let i=0;
-i<qty;
+let i = 0;
+i < quantity;
 i++
 ){
 
@@ -2109,30 +2664,35 @@ images.push(idBack);
 }
 
 
-images.forEach(src=>{
+images.forEach(src => {
 
-const div=
+const item =
 document.createElement("div");
 
-div.className=
-"print-photo";
 
-div.style.width=
-"220px";
-
-div.style.height=
-"138px";
+item.className =
+"print-item";
 
 
-const img=
+item.style.width =
+"235px";
+
+
+item.style.height =
+"148px";
+
+
+const image =
 document.createElement("img");
 
-img.src=src;
+
+image.src = src;
 
 
-div.appendChild(img);
+item.appendChild(image);
 
-a4.appendChild(div);
+
+sheet.appendChild(item);
 
 });
 
@@ -2150,8 +2710,26 @@ behavior:"smooth"
 
 }
 
+
+
+/* ==================================================
+   CLEAR PRINT
+================================================== */
+
+function clearPrint(){
+
+document
+.getElementById("a4Sheet")
+.innerHTML = "";
+
+
+document
+.getElementById("printArea")
+.classList.add("hidden");
+
+}
+
 </script>
 
 </body>
 </html>
-```
